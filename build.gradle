@@ -1,0 +1,43 @@
+group 'com.satori'
+version '1.0-SNAPSHOT'
+
+group 'com.satori.satsol'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+buildDir = ".out"
+
+mainClassName = 'com.satori.SocketIOMain'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url('https://oss.sonatype.org/content/repositories/snapshots/')
+    }
+    jcenter()
+}
+
+dependencies {
+    compile "io.socket:socket.io-client:1.0.0"
+}
+
+
+shadowJar {
+    archiveName = "${project.name}-full-${version}.jar"
+
+}
